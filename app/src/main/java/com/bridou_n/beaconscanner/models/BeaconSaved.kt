@@ -11,7 +11,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import org.altbeacon.beacon.Beacon
 import org.altbeacon.beacon.utils.UrlBeaconUrlCompressor
-import java.lang.IllegalStateException
+import org.sembeacon.android.SemBeacon
 import java.util.*
 
 /**
@@ -80,6 +80,10 @@ data class BeaconSaved(
     @Embedded(prefix = "ruuvi_data_")
     val ruuviData: RuuviData? = null,
 
+    @SerializedName("sembeacon_data")
+    @Embedded(prefix = "sembeacon_data_")
+    val semBeaconData: SemBeaconData? = null,
+
     @ColumnInfo(name = "is_blocked")
     val isBlocked: Boolean = false
 ) {
@@ -89,6 +93,7 @@ data class BeaconSaved(
         const val TYPE_ALTBEACON = "altbeacon"
         const val TYPE_IBEACON = "ibeacon"
         const val TYPE_RUUVITAG = "ruuvitag"
+        const val TYPE_SEMBEACON = "sembeacon"
 
         fun createFromBeacon(beacon: Beacon, isBlocked: Boolean = false) : BeaconSaved {
             // Common fields to every beacons
@@ -110,11 +115,14 @@ data class BeaconSaved(
             var eddystoneUidData: EddystoneUidData? = null
             var telemetryData: TelemetryData? = null
             var ruuviData: RuuviData? = null
+            var semBeaconData: SemBeaconData? = null
 
-            if (beacon.serviceUuid == 0xFEAA) { // This is an Eddystone format
+            if (beacon is SemBeacon) {
+                beaconType = TYPE_SEMBEACON
+                semBeaconData = SemBeaconData(beacon.id1.toString(), beacon.id2.toString(), beacon.uri)
+            } else if (beacon.serviceUuid == 0xFEAA) { // This is an Eddystone format
 
-                // Do we have telemetry data?
-                if (beacon.extraDataFields.size >= 5) {
+                if (beacon.extraDataFields.size >= 5) {  // Do we have telemetry data?
                     telemetryData = TelemetryData(beacon.extraDataFields[0],
                             beacon.extraDataFields[1],
                             TelemetryData.getTemperatureFromTlmField(beacon.extraDataFields[2].toFloat()),
@@ -162,6 +170,7 @@ data class BeaconSaved(
                     eddystoneUidData = eddystoneUidData,
                     telemetryData = telemetryData,
                     ruuviData = ruuviData,
+                    semBeaconData = semBeaconData,
 
                     isBlocked = isBlocked
             )
@@ -249,6 +258,25 @@ data class BeaconSaved(
                     major = "2",
                     minor = "342"
                 )
+            )
+        }
+
+        fun semBeaconSample() : BeaconSaved {
+            check(!BuildTypes.isRelease()) { "Only use this for debugging purposes" }
+            return BeaconSaved(
+                    hashcode = UUID.randomUUID().hashCode(),
+                    beaconType = TYPE_SEMBEACON,
+                    beaconAddress = "74:FC:B0:45:0B:02",
+                    manufacturer = 0x0118,
+                    txPower = -63,
+                    rssi = -38,
+                    distance = 0.02,
+                    lastSeen = Date().time - 40 * DateUtils.SECOND_IN_MILLIS,
+                    semBeaconData = SemBeaconData(
+                            namespaceId = UUID.randomUUID().toString(),
+                            instanceId = UUID.randomUUID().toString(),
+                            resourceURI = "https://purl.org/example#beacon"
+                    )
             )
         }
     

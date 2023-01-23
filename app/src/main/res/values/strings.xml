@@ -9,6 +9,7 @@
     <string name="bluetooth_state">Bluetooth state</string>
     <string name="scanning_for_beacons">Scanning </string>
     <string name="altbeacon">ALTbeacon</string>
+    <string name="sembeacon">SemBeacon</string>
     <string name="ibeacon">iBeacon</string>
     <string name="metters_abbreviation">m</string>
 
@@ -68,6 +69,7 @@
     <string name="uuid">UUID</string>
 
     <string name="url_title">URL</string>
+    <string name="uri_title">URI</string>
     <string name="ruuvitag">RuuviTag</string>
 
     <string name="air_pressure_title">Air pressure</string>

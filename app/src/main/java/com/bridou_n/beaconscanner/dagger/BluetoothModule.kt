@@ -9,6 +9,8 @@ import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.BeaconParser
 import javax.inject.Singleton
 
+import org.sembeacon.android.SemBeaconParser;
+
 /**
  * Created by bridou_n on 05/10/2016.
  */
@@ -34,11 +36,13 @@ object BluetoothModule {
         instance.foregroundBetweenScanPeriod = prefs.getScanDelay()
 
         // Add all the beacon types we want to discover
-        instance.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT))
-        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_UID_LAYOUT))
-        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_URL_LAYOUT))
-        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_TLM_LAYOUT))
-
+        instance.beaconParsers.clear(); // AltBeacon is 2nd order
+        instance.beaconParsers.add(SemBeaconParser())
+//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(ALTBEACON_LAYOUT))
+//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT))
+//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_UID_LAYOUT))
+//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_URL_LAYOUT))
+//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_TLM_LAYOUT))
         return instance
     }
 }

@@ -8,7 +8,7 @@ import com.bridou_n.beaconscanner.models.BeaconSaved
         entities = [
             BeaconSaved::class
         ],
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

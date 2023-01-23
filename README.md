@@ -1,4 +1,3 @@
-
 # :cyclone: Android Beacon Scanner #
 
 A simple android beacon scanner that can recognize iBeacons, AltBeacons, Eddystone beacons (UID and URL, with or without TLM) and RuuviTags [available on Google Play](https://play.google.com/store/apps/details?id=com.bridou_n.beaconscanner).
@@ -12,7 +11,7 @@ Available for android 5.0+ and smartphones with Bluetooth LE.
 This app will scan for beacons near you! :v:
 
 For all Beacons:
-* The type of beacon (iBeacon, AltBeacon, Eddystone or RuuviTag)
+* The type of beacon (iBeacon, AltBeacon, Eddystone, SemBeacon or RuuviTag)
 * The approximation of the distance with the beacon (this is based on the RSSI value received and is NOT accurate)
 * The beacon address and manufacturer code
 * The RSSI and TX values
@@ -31,6 +30,11 @@ For Eddystone-UID beacons:
 For Eddystone-URL and RuuviTag
 * Clickable URL
 * TLM data sent if any
+
+For SemBeacon
+* Clickable URI
+* NamespaceID
+* InstanceID
 
 For RuuviTag:
 * Air Pressure

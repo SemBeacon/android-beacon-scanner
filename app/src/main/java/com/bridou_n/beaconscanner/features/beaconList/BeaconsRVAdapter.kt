@@ -17,6 +17,7 @@ import com.bridou_n.beaconscanner.models.BeaconSaved.Companion.TYPE_ALTBEACON
 import com.bridou_n.beaconscanner.models.BeaconSaved.Companion.TYPE_EDDYSTONE_UID
 import com.bridou_n.beaconscanner.models.BeaconSaved.Companion.TYPE_EDDYSTONE_URL
 import com.bridou_n.beaconscanner.models.BeaconSaved.Companion.TYPE_RUUVITAG
+import com.bridou_n.beaconscanner.models.BeaconSaved.Companion.TYPE_SEMBEACON
 import com.bridou_n.beaconscanner.utils.extensionFunctions.toCoolFormat
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -76,6 +77,7 @@ class BeaconsRecyclerViewAdapter(
             }
             
             itemView.beacon_type.text = ctx.getString(when (beacon.beaconType) {
+                TYPE_SEMBEACON -> R.string.sembeacon
                 TYPE_ALTBEACON -> R.string.altbeacon
                 TYPE_EDDYSTONE_UID -> R.string.eddystone_uid
                 TYPE_EDDYSTONE_URL -> R.string.eddystone_url
@@ -123,6 +125,17 @@ class BeaconsRecyclerViewAdapter(
                     add(BeaconInfo(ctx.getString(R.string.air_pressure_title), String.format(ctx.getString(R.string.x_hpa), it.airPressure)))
                     add(BeaconInfo(ctx.getString(R.string.temperature_title), ctx.getString(R.string.x_degrees, "${it.temperatue}")))
                     add(BeaconInfo(ctx.getString(R.string.humidity_title), String.format("%d %%", it.humidity)))
+                }
+
+                // Adding SemBeacon data
+                beacon.semBeaconData?.let{
+                    add(BeaconInfo(ctx.getString(R.string.namespace_id_title), it.namespaceId))
+                    add(BeaconInfo(ctx.getString(R.string.instance_id_title), it.instanceId))
+                    add(BeaconInfo(
+                            title = ctx.getString(R.string.uri_title),
+                            content = it.resourceURI ?: "UNKNOWN",
+                            onItemClicked = { onUrlClicked(it.resourceURI) }
+                    ))
                 }
 
                 // Adding TLM data
