@@ -39,7 +39,7 @@ object BluetoothModule {
         instance.beaconParsers.clear(); // AltBeacon is 2nd order
         instance.beaconParsers.add(SemBeaconParser())
 //        instance.beaconParsers.add(BeaconParser().setBeaconLayout(ALTBEACON_LAYOUT))
-//        instance.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT))
+        instance.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT))
 //        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_UID_LAYOUT))
 //        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_URL_LAYOUT))
 //        instance.beaconParsers.add(BeaconParser().setBeaconLayout(EDDYSTONE_TLM_LAYOUT))
