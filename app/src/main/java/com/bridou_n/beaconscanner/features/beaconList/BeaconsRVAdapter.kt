@@ -130,7 +130,7 @@ class BeaconsRecyclerViewAdapter(
                 // Adding SemBeacon data
                 beacon.semBeaconData?.let{
                     add(BeaconInfo(ctx.getString(R.string.namespace_id_title), it.namespaceId))
-                    add(BeaconInfo(ctx.getString(R.string.instance_id_title), it.instanceId))
+                    add(BeaconInfo(ctx.getString(R.string.instance_id_singular_title), it.instanceId))
                     add(BeaconInfo(
                             title = ctx.getString(R.string.uri_title),
                             content = it.resourceURI ?: "UNKNOWN",
