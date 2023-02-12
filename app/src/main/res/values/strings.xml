@@ -66,6 +66,7 @@
 
     <string name="namespace_id_title">NamespaceID</string>
     <string name="instance_id_title">InstanceIDs</string>
+    <string name="instance_id_singular_title">InstanceID</string>
     <string name="uuid">UUID</string>
 
     <string name="url_title">URL</string>
