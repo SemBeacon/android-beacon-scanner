@@ -2,7 +2,7 @@
 
 A simple android beacon scanner that can recognize iBeacons, AltBeacons, Eddystone beacons (UID and URL, with or without TLM) and RuuviTags [available on Google Play](https://play.google.com/store/apps/details?id=com.bridou_n.beaconscanner).
 
-<img src="screenshots/screen-1.png" width="25%" />     <img src="screenshots/screen-2.png" width="25%" />   <img src="screenshots/screen-3.png" width="25%" />
+<img src="screenshots/screen-1.png" width="20%" />     <img src="screenshots/screen-2.png" width="20%" />   <img src="screenshots/screen-3.png" width="20%" />  <img src="screenshots/screen-4.jpg" width="20%" />
 
 Available for android 5.0+ and smartphones with Bluetooth LE.
 
