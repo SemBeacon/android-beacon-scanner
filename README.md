@@ -1,3 +1,5 @@
+> This repository contains an example beacon scanner that supports SemBeacon. The implementation is created on top of an existing open source application created by Nicolas Bridoux that can be found here: https://github.com/Bridouille/android-beacon-scanner
+
 # :cyclone: Android Beacon Scanner #
 
 A simple android beacon scanner that can recognize iBeacons, AltBeacons, Eddystone beacons (UID and URL, with or without TLM) and RuuviTags [available on Google Play](https://play.google.com/store/apps/details?id=com.bridou_n.beaconscanner).
